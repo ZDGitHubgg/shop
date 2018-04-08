@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zd.shop.dao.TbItemCustomMapper" >
+  <sql id="Base_Column_List" >
+    /*pro_id as proid, pro_name as proname, pro_price as proprice, pro_image as proimage,
+    pro_desc as prodesc, pro_date as prodate, pro_status as prostatus, cat_id as catid*/
+    p.pro_id, p.pro_name, p.pro_price, p.pro_image,
+    p.pro_desc, p.pro_date, p.pro_status, p.cat_id, c.cat_name,
+     CASE p.pro_status
+		WHEN 1 THEN "上架"
+		WHEN 2 THEN "下架"
+		WHEN 3 THEN "删除"
+		ELSE "未知" END as statusName
+  </sql>
+
+  <select id="selectByPage" parameterType="com.zd.shop.pojo.dto.Page" resultType="com.zd.shop.pojo.vo.ProCustom">
+    select
+    <include refid="Base_Column_List" />
+    FROM product p
+    LEFT JOIN category c ON p.cat_id = c.cat_id
+    where p.pro_status!=3
+    limit #{offset},#{limit}
+  </select>
+
+  <select id="countItems" resultType="long">
+    select count(1)
+    from product
+    where pro_status!=3
+  </select>
+
+  <!--修改商品status（删除）-->
+  <update id="batchUpdate" parameterType="com.zd.shop.pojo.po.Product">
+    update product
+    <if test="pro_name !=null">
+      pro_name = #{pro_name},
+    </if>
+    <if test="pro_price !=null">
+      pro_price = #{pro_price},
+    </if>
+    <if test="pro_image !=null">
+      pro_image = #{pro_image},
+    </if>
+    <if test="pro_desc !=null">
+      pro_desc = #{pro_desc},
+    </if>
+    <if test="pro_date !=null">
+      pro_date = #{pro_date},
+    </if>
+    pro_status = 3
+    <if test="cat_id !=null">
+      cat_id = #{cat_id},
+    </if>
+    where pro_id = #{pro_id}
+  </update>
+
+  <select id="getSearchItemList" resultType="com.zd.shop.pojo.vo.SearchItemCustom">
+    SELECT
+    p.pro_id as id,p.pro_desc AS proDesc,p.pro_price as proPrice,
+    p.pro_name AS proName,p.pro_image AS proImage,c.cat_name AS catName
+    FROM product p
+    LEFT JOIN category c ON p.cat_id=c.cat_id
+    WHERE p.pro_status = 1
+    ORDER BY p.pro_id DESC
+  </select>
+
+</mapper>

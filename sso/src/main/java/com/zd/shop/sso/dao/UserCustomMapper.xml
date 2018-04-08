@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zd.shop.sso.dao.UserCustomMapper" >
+  <sql id="Base_Column_List" >
+    user_id AS userId, user_name AS userName, user_password AS userPassword,
+    user_email AS userEmail, user_gender AS userGender, user_phone AS userPhone, user_address AS userAddress
+  </sql>
+  <select id="selectByName" resultType="com.zd.shop.sso.pojo.po.User">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_name = #{username}
+  </select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/manager/manager-web" />
+    <file type="web" url="file://$PROJECT_DIR$/portal/portal-web" />
+    <file type="web" url="file://$PROJECT_DIR$/search/search-web" />
+    <file type="web" url="file://$PROJECT_DIR$/sso" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/parent/pom.xml" />
+        <option value="$PROJECT_DIR$/search/pom.xml" />
+        <option value="$PROJECT_DIR$/search/search-dao/pom.xml" />
+        <option value="$PROJECT_DIR$/search/search-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/search/search-pojo/pom.xml" />
+        <option value="$PROJECT_DIR$/search/search-service/pom.xml" />
+        <option value="$PROJECT_DIR$/search/search-web/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/parent/search/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
